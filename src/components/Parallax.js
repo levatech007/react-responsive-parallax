@@ -56,8 +56,9 @@ class Parallax extends Component {
 
   render() {
     return(
-      <section className="parallax">
-        <img src = { require(`../images/background-${this.state.currentDisplayImage}`) }/>
+      <section
+        className="parallax"
+        style={{ backgroundImage: `url(${require(`../images/background-${this.state.currentDisplayImage}`)})` }}>
         <h1>Parallax content here</h1>
       </section>
     )
