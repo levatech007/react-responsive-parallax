@@ -1,6 +1,6 @@
 import React from 'react';
 import { withSiteData } from 'react-static';
-import HeroContent from '../components/HeroContent';
+import Parallax from '../components/Parallax';
 import Navbar from '../components/Navbar';
 import Content from '../components/Content';
 import ContactForm from '../components/ContactForm';
@@ -8,7 +8,7 @@ import ContactForm from '../components/ContactForm';
 
 export default withSiteData(() => (
   <div>
-    <HeroContent />
+    <Parallax />
     <Navbar />
     <Content />
     <ContactForm />
