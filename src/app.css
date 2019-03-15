@@ -15,3 +15,43 @@ body {
   text-align: center;
   margin: 0;
 }
+
+
+/* CONTACT FORM: */
+form {
+  width: 50%;
+  margin: 0 auto;
+}
+
+input, textarea {
+  border: none;
+  width: 100%;
+  padding: 12px;
+  border-bottom: 1px solid #ccc;
+  box-sizing: border-box;
+  resize: vertical;
+}
+
+label {
+  padding: 12px 12px 12px 0;
+  display: inline-block;
+}
+
+input:focus, textarea:focus {
+  outline-width: 0;
+  background: #E6E6FA;
+  border: none;
+}
+
+button:focus {
+  outline-width: 0;
+  background: gray;
+}
+
+button {
+  margin: 30px 0;
+  padding: 10px 20px;
+  border: none;
+  background: aqua;
+  border-radius: 3px;
+}
