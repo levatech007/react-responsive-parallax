@@ -6,11 +6,13 @@ class Parallax extends Component {
     this.state = {
       currentScreenHeight:  window.innerHeight,
       currentScreenWidth:   window.innerWidth,
-      currentDisplayImage:  "W-1366.png"
+      currentDisplayImage:  "L-1366",
+      availableImgWidths:   [768, 1024, 1366, 1600],
+      availableImgHeights:  [960, 1136]
     }
     this.handleScreenDimensionsChange = this.handleScreenDimensionsChange.bind(this)
     this.selectCurrentDisplayImage    = this.selectCurrentDisplayImage.bind(this)
-    this.findCurrentDisplayDimension  = this.findCurrentDisplayDimension.bind(this)
+    this.findCurrentImageDimension    = this.findCurrentImageDimension.bind(this)
   }
 
   componentDidMount() {
@@ -30,26 +32,21 @@ class Parallax extends Component {
   }
 
   selectCurrentDisplayImage() {
-    if(window.innerHeight < window.innerWidth) {
-      console.log("Landscape")
-      // this.setState({ displayImage: `imagename-H-${ widthMatch }` })
-      return "W-1024.png"
-      // add different images for different screen widths, use require?
-      // 640,768,1024,1366,1600,1920,2560,3000 => match the slot where width belongs and select the higher number
-      // add width into the file name, template string "imagname-W-1920" or "imagename-H-1080" W-width for landscape photos, H-height for portrait
-    } else {
-      console.log("Portrait")
-      return "H-960.png"
-      // heights:
-      //
-    }
+    // images are named background-L-1024.png
+    let target = window.innerHeight < window.innerWidth ? window.innerWidth : window.innerHeight
+    let screenOrientation = window.innerHeight < window.innerWidth ? "L" : "P"
+    let availableImageDimensions = window.innerHeight < window.innerWidth ? this.state.availableImgWidths : this.state.availableImgHeights
+    let imageWidth = this.findCurrentImageDimension(availableImageDimensions, target)
+    return `${ screenOrientation }-${ imageWidth }`
+
   }
 
-  findCurrentDisplayDimension(screenDimension) {
-    let dimensionsArray = []
-    // search through array
+  findCurrentImageDimension(screenDimensions, target) {
+    var i = screenDimensions.length;
+    while (screenDimensions[--i] > target);
+      return screenDimensions[++i];
   }
-  //
+
   componentWillUnmount() {
     window.removeEventListener("resize", this.handleScreenDimensionsChange);
   }
@@ -58,7 +55,7 @@ class Parallax extends Component {
     return(
       <section
         className="parallax"
-        style={{ backgroundImage: `url(${require(`../images/background-${this.state.currentDisplayImage}`)})` }}>
+        style={{ backgroundImage: `url(${require(`../images/background-${this.state.currentDisplayImage}.png`)})` }}>
         <h1>Parallax content here</h1>
       </section>
     )
